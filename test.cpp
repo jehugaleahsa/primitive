@@ -58,8 +58,8 @@ int main() {
 
     // Unary operators
     constexpr Int pos(3);
-    constexpr decltype(auto) pos_res = +pos;
-    static_assert(&pos == &pos_res, "The + unary operator did not return the primitive.");
+    constexpr Int pos_res = +pos;
+    static_assert(pos.get() == pos_res.get(), "The + unary operator did not return the primitive.");
 
     constexpr Int neg(5);
     constexpr Int neg_res = -neg;
@@ -148,17 +148,17 @@ int main() {
     shiftright_self >>= 1;
     assert(shiftright_self.get() == 2);
 
-    Int bitand(5);
-    bitand &= 1;
-    assert(bitand.get() == 1);
+    Int bit_and(5);
+    bit_and &= 1;
+    assert(bit_and.get() == 1);
 
     Int bitand_self(5);
     bitand_self &= 1;
     assert(bitand_self.get() == 1);
 
-    Int bitor(5);
-    bitor |= 2;
-    assert(bitor.get() == 7);
+    Int bit_or(5);
+    bit_or |= 2;
+    assert(bit_or.get() == 7);
 
     Int bitor_self(5);
     bitor_self |= 2;
