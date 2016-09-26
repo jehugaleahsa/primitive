@@ -28,7 +28,7 @@ This header provides the `primitive` class template, which is restricted to arit
 * float
 * double
 * long double
-* Types defined in <cstdint>
+* Types defined in `<cstdint>
 
 Given `primitive<int> value;`, the variable `value` will hold the value `0`. Ideally, interactions with the `primitive` wrapper should perfectly match working with the underlying primitive. When the underlying primitive is needed, the `get` method will provide a copy of the underlying primitive. `primitive` also provides a `value_type` type definition to expose the underlying primitive type.
 
