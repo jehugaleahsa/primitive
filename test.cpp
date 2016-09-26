@@ -347,4 +347,7 @@ int main() {
     std::ostringstream output;
     output << couted;
     assert(output.str() == "123");
+
+    constexpr Int expanded = Short(123);
+    static_assert(expanded.get() == 123, "Could not convert from short to int.");
 }

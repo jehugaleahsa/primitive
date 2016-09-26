@@ -1,5 +1,5 @@
-#using msvc : : : <compileflags>-D_WIN32_WINNT=0x0501 ;
-using gcc : : : <compileflags>-std=c++14 ;
+using msvc : : : <compileflags>-D_WIN32_WINNT=0x0501 ;
+#using gcc : : : <compileflags>-std=c++14 ;
 
 exe "test" 
     : "test.cpp"
