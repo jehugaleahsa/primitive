@@ -347,7 +347,4 @@ int main() {
     std::ostringstream output;
     output << couted;
     assert(output.str() == "123");
-
-    std::uint32_t foobar;
-    std::cout << foobar << std::endl;
 }
