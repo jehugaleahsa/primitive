@@ -85,12 +85,12 @@ public:
     template<typename U = T, typename = std::enable_if_t< !std::is_same<U, bool>::value  >>
     constexpr primitive const& operator+() const noexcept { return *this; }
     template<typename U = T, typename = std::enable_if_t< !std::is_same<U, bool>::value  >>
-    constexpr primitive operator-() const noexcept { return -get(); }
+    constexpr primitive operator-() const noexcept { return -m_value; }
 
     template<typename U = T, typename = std::enable_if_t< std::is_integral<U>::value && !std::is_same<U, bool>::value >>
-    constexpr primitive operator~() const noexcept { return ~get(); }
+    constexpr primitive operator~() const noexcept { return ~m_value; }
 
-    constexpr primitive<bool> operator!() const noexcept { return !get(); }
+    constexpr primitive<bool> operator!() const noexcept { return !m_value; }
 
     primitive& operator++() noexcept { 
         ++m_value; 

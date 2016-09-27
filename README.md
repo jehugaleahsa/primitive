@@ -46,18 +46,10 @@ The `primitive` class includes member templates to limit which conversions are p
 In cases where you are sure about the conversion, explicit conversions via `static_cast` are permitted.
 
 ## Limiting Booleans (optional)
-C++ programmers are accustom to treating booleans (`bool`) as arithmetic types. It is not uncommon to see a `bool` added to an `int`. However, most of the time, conversion to and from `bool` should be explicit through comparisons or logical negation (`!`). Consider the following code:
+C++ programmers are accustom to treating booleans (`bool`) as arithmetic types. It is not uncommon to see a `bool` added to an `int`. However, most of the time, conversion to and from `bool` should be explicit through comparisons or logical negation (`!`). For that reason, it will be common to see the following when using `primitive<bool>`:
 
-    bool isTeacherNeeded = true;
-    int students = 21;
-    int participants = students + isTeacherNeeded;  // 22
+    if (condition.get()) {}
+    if (condition == true) {}
+    if (!!condition) {}  // works for all arithmetic types
     
-With the restrictions placed on `primitive<bool>`, the code would need to be rewritten as:
-
-    using Boolean = primitive<bool>;
-    using Integer = primitive<int>;
-    Boolean isTeacherNeeded = true;
-    Integer students = 21;
-    Integer participants = students + (isTeacherNeeded == true ? 1 : 0);
-    
-Instead of comparing to `true`, `get` could have been called, as well. I find this overly verbose, but the only alternative is to make an implicit conversion from `primitive<bool>` to `bool`.
+I find this overly verbose, but the only alternative is to make an implicit conversion from `primitive<bool>` to `bool`. 
