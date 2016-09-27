@@ -1,59 +1,65 @@
 #ifndef ARITHMETIC_TRAITS_HPP
 #define ARITHMETIC_TRAITS_HPP
 
-template<typename TTo> struct promoted_alias_type { using type = TTo; };
-template<typename TFrom, typename TTo> struct promote_arithmetic;
-template<typename TFrom, typename TTo> using promote_arithmetic_t = typename promote_arithmetic<TFrom, TTo>::type;
+#include <type_traits>
 
-template<> struct promote_arithmetic<signed char, short> : promoted_alias_type<short> {};
+template<typename TFrom, typename TTo> struct is_promotion : std::false_type {};
+template<typename TFrom, typename TTo> struct is_conversion : std::false_type {};
 
-template<> struct promote_arithmetic<unsigned char, unsigned short> : promoted_alias_type<unsigned short> {};
+template<> struct is_conversion<int, signed char> : std::true_type {};
+template<> struct is_conversion<unsigned int, unsigned char> : std::true_type {};
+template<> struct is_conversion<int, short> : std::true_type {};
+template<> struct is_conversion<unsigned int, unsigned short> : std::true_type {};
 
-template<> struct promote_arithmetic<signed char, int> : promoted_alias_type<int> {};
-template<> struct promote_arithmetic<short, int> : promoted_alias_type<int> {};
+template<> struct is_promotion<signed char, short> : std::true_type {};
 
-template<> struct promote_arithmetic<unsigned char, unsigned int> : promoted_alias_type<unsigned int> {};
-template<> struct promote_arithmetic<unsigned short, unsigned int> : promoted_alias_type<unsigned int> {};
+template<> struct is_promotion<unsigned char, unsigned short> : std::true_type {};
 
-template<> struct promote_arithmetic<signed char, long> : promoted_alias_type<long> {};
-template<> struct promote_arithmetic<short, long> : promoted_alias_type<long> {};
-template<> struct promote_arithmetic<int, long> : promoted_alias_type<long> {};
+template<> struct is_promotion<signed char, int> : std::true_type {};
+template<> struct is_promotion<short, int> : std::true_type {};
 
-template<> struct promote_arithmetic<unsigned char, unsigned long> : promoted_alias_type<unsigned long> {};
-template<> struct promote_arithmetic<unsigned short, unsigned long> : promoted_alias_type<unsigned long> {};
-template<> struct promote_arithmetic<unsigned int, unsigned long> : promoted_alias_type<unsigned long> {};
+template<> struct is_promotion<unsigned char, unsigned int> : std::true_type {};
+template<> struct is_promotion<unsigned short, unsigned int> : std::true_type {};
 
-template<> struct promote_arithmetic<signed char, long long> : promoted_alias_type<long long> {};
-template<> struct promote_arithmetic<short, long long> : promoted_alias_type<long long> {};
-template<> struct promote_arithmetic<int, long long> : promoted_alias_type<long long> {};
-template<> struct promote_arithmetic<long, long long> : promoted_alias_type<long long> {};
+template<> struct is_promotion<signed char, long> : std::true_type {};
+template<> struct is_promotion<short, long> : std::true_type {};
+template<> struct is_promotion<int, long> : std::true_type {};
 
-template<> struct promote_arithmetic<unsigned char, unsigned long long> : promoted_alias_type<unsigned long long> {};
-template<> struct promote_arithmetic<unsigned short, unsigned long long> : promoted_alias_type<unsigned long long> {};
-template<> struct promote_arithmetic<unsigned int, unsigned long long> : promoted_alias_type<unsigned long long> {};
-template<> struct promote_arithmetic<unsigned long, unsigned long long> : promoted_alias_type<unsigned long long> {};
+template<> struct is_promotion<unsigned char, unsigned long> : std::true_type {};
+template<> struct is_promotion<unsigned short, unsigned long> : std::true_type {};
+template<> struct is_promotion<unsigned int, unsigned long> : std::true_type {};
 
-template<> struct promote_arithmetic<signed char, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<unsigned char, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<short, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<unsigned short, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<int, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<unsigned int, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<long, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<unsigned long, double> : promoted_alias_type<double> {};
-template<> struct promote_arithmetic<float, double> : promoted_alias_type<double> {};
+template<> struct is_promotion<signed char, long long> : std::true_type {};
+template<> struct is_promotion<short, long long> : std::true_type {};
+template<> struct is_promotion<int, long long> : std::true_type {};
+template<> struct is_promotion<long, long long> : std::true_type {};
 
-template<> struct promote_arithmetic<signed char, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<unsigned char, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<short, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<unsigned short, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<int, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<unsigned int, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<long, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<unsigned long, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<long long, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<unsigned long long, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<float, long double> : promoted_alias_type<long double> {};
-template<> struct promote_arithmetic<double, long double> : promoted_alias_type<long double> {};
+template<> struct is_promotion<unsigned char, unsigned long long> : std::true_type {};
+template<> struct is_promotion<unsigned short, unsigned long long> : std::true_type {};
+template<> struct is_promotion<unsigned int, unsigned long long> : std::true_type {};
+template<> struct is_promotion<unsigned long, unsigned long long> : std::true_type {};
+
+template<> struct is_promotion<signed char, double> : std::true_type {};
+template<> struct is_promotion<unsigned char, double> : std::true_type {};
+template<> struct is_promotion<short, double> : std::true_type {};
+template<> struct is_promotion<unsigned short, double> : std::true_type {};
+template<> struct is_promotion<int, double> : std::true_type {};
+template<> struct is_promotion<unsigned int, double> : std::true_type {};
+template<> struct is_promotion<long, double> : std::true_type {};
+template<> struct is_promotion<unsigned long, double> : std::true_type {};
+template<> struct is_promotion<float, double> : std::true_type {};
+
+template<> struct is_promotion<signed char, long double> : std::true_type {};
+template<> struct is_promotion<unsigned char, long double> : std::true_type {};
+template<> struct is_promotion<short, long double> : std::true_type {};
+template<> struct is_promotion<unsigned short, long double> : std::true_type {};
+template<> struct is_promotion<int, long double> : std::true_type {};
+template<> struct is_promotion<unsigned int, long double> : std::true_type {};
+template<> struct is_promotion<long, long double> : std::true_type {};
+template<> struct is_promotion<unsigned long, long double> : std::true_type {};
+template<> struct is_promotion<long long, long double> : std::true_type {};
+template<> struct is_promotion<unsigned long long, long double> : std::true_type {};
+template<> struct is_promotion<float, long double> : std::true_type {};
+template<> struct is_promotion<double, long double> : std::true_type {};
 
 #endif // ARITHMETIC_TRAITS_HPP
