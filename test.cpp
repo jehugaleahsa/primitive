@@ -343,11 +343,14 @@ int main() {
     input >> cinned;
     assert(cinned == 123);
 
-    Int couted(123);
+    constexpr Int couted(123);
     std::ostringstream output;
     output << couted;
     assert(output.str() == "123");
 
     constexpr Int expanded = Short(123);
     static_assert(expanded.get() == 123, "Could not convert from short to int.");
+
+    static_assert(Int(1), "The value did not convert to true.");
+    static_assert(!Int(0), "The value did convert to false.");
 }

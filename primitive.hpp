@@ -218,6 +218,8 @@ public:
         return *this;
     }
 
+    constexpr operator bool() const noexcept { return !!m_value; }
+
     template<typename U>
     constexpr explicit operator primitive<U>() const noexcept { return static_cast<U>(m_value); }
 
