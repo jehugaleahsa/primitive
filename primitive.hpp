@@ -36,6 +36,7 @@ public:
     template<typename U = T, typename = std::enable_if_t< std::is_integral<U>::value && !std::is_same<U, bool>::value >>
     constexpr primitive operator~() const noexcept { return ~m_value; }
 
+    template<typename U = T, typename = std::enable_if_t< std::is_same<U, bool>::value >>
     constexpr bool operator!() const noexcept { return !m_value; }
 
     primitive& operator++() noexcept { 
@@ -260,15 +261,15 @@ constexpr auto operator>>(primitive<T1> const& lhs, primitive<T2> const& rhs) no
     return lhs.get() >> rhs.get();
 }
 
-constexpr primitive<bool> operator&&(primitive<bool> const& lhs, bool const& rhs) noexcept { return lhs.get() && rhs; }
-constexpr primitive<bool> operator&&(bool const& lhs, primitive<bool> const& rhs) noexcept { return lhs && rhs.get(); }
-constexpr primitive<bool> operator&&(primitive<bool> const& lhs, primitive<bool> const& rhs) noexcept {
+constexpr bool operator&&(primitive<bool> const& lhs, bool const& rhs) noexcept { return lhs.get() && rhs; }
+constexpr bool operator&&(bool const& lhs, primitive<bool> const& rhs) noexcept { return lhs && rhs.get(); }
+constexpr bool operator&&(primitive<bool> const& lhs, primitive<bool> const& rhs) noexcept {
     return lhs.get() && rhs.get();
 }
 
-constexpr primitive<bool> operator||(primitive<bool> const& lhs, bool const& rhs) noexcept { return lhs.get() || rhs; }
-constexpr primitive<bool> operator||(bool const& lhs, primitive<bool> const& rhs) noexcept { return lhs || rhs.get(); }
-constexpr primitive<bool> operator||(primitive<bool> const& lhs, primitive<bool> const& rhs) noexcept {
+constexpr bool operator||(primitive<bool> const& lhs, bool const& rhs) noexcept { return lhs.get() || rhs; }
+constexpr bool operator||(bool const& lhs, primitive<bool> const& rhs) noexcept { return lhs || rhs.get(); }
+constexpr bool operator||(primitive<bool> const& lhs, primitive<bool> const& rhs) noexcept {
     return lhs.get() || rhs.get();
 }
 

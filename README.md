@@ -48,8 +48,9 @@ In cases where you are sure about the conversion, explicit conversions via `stat
 ## Limiting Booleans (optional)
 C++ programmers are accustom to treating booleans (`bool`) as arithmetic types. It is not uncommon to see a `bool` added to an `int`. However, most of the time, conversion to and from `bool` should be explicit through comparisons or logical negation (`!`). For that reason, it will be common to see the following when using `primitive<bool>`:
 
+    primitive<bool> condition(true);
     if (condition.get()) {}
     if (condition == true) {}
-    if (!!condition) {}  // works for all arithmetic types
+    if (!!condition) {}
     
 I find this overly verbose, but the only alternative is to make an implicit conversion from `primitive<bool>` to `bool`. 

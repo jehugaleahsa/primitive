@@ -305,13 +305,13 @@ int main() {
     static_assert((4 >> Int(1)).get() == 2, "Binary >> failed.");
     static_assert((Int(4) >> Int(1)).get() == 2, "Binary >> failed.");
 
-    static_assert(!(Boolean(true) && false).get(), "Binary && failed.");
-    static_assert(!(true && Boolean(false)).get(), "Binary && failed.");
-    static_assert(!(Boolean(true) && Boolean(false)).get(), "Binary && failed.");
+    static_assert(!(Boolean(true) && false), "Binary && failed.");
+    static_assert(!(true && Boolean(false)), "Binary && failed.");
+    static_assert(!(Boolean(true) && Boolean(false)), "Binary && failed.");
 
-    static_assert((Boolean(true) || false).get(), "Binary || failed.");
-    static_assert((true || Boolean(false)).get(), "Binary || failed.");
-    static_assert((Boolean(true) || Boolean(false)).get(), "Binary || failed.");
+    static_assert((Boolean(true) || false), "Binary || failed.");
+    static_assert((true || Boolean(false)), "Binary || failed.");
+    static_assert((Boolean(true) || Boolean(false)), "Binary || failed.");
 
     static_assert(Int(1) == 1, "Binary == failed.");
     static_assert(1 == Int(1), "Binary == failed.");
@@ -351,6 +351,6 @@ int main() {
     constexpr Int expanded = Short(123);
     static_assert(expanded.get() == 123, "Could not convert from short to int.");
 
-    static_assert(!!Int(1), "The value did not convert to true.");
-    static_assert(!Int(0), "The value did convert to false.");
+    static_assert(!!Boolean(true), "The value did not convert to true.");
+    static_assert(!Boolean(false), "The value did convert to false.");
 }
