@@ -17,18 +17,18 @@ For this reason, many organizations have policies in place that all variables mu
 
 This header provides the `primitive` class template, which is restricted to arithmetic types (types where `std::is_arithmetic<T>::value == true`). The following types are included:
 
-* bool
-* char (char16_t, char32_t and wchar) 
-* signed char
-* unsigned char
-* short (signed and unsigned)
-* int (signed and unsigned)
-* long (signed and unsigned)
-* long long (signed and unsigned)
-* float
-* double
-* long double
-* Types defined in &lt;cstdint&gt;
+* `bool`
+* `char` (`char16_t`, `char32_t` and `wchar`) 
+* `signed char`
+* `unsigned char`
+* `short` (`signed` and `unsigned`)
+* `int` (`signed` and `unsigned`)
+* `long` (`signed` and `unsigned`)
+* `long long` (`signed` and `unsigned`)
+* `float`
+* `double`
+* `long double`
+* Types defined in `<cstdint>`
 
 Given `primitive<int> value;`, the variable `value` will hold the value `0`. Ideally, interactions with the `primitive` wrapper should perfectly match working with the underlying primitive. When the underlying primitive is needed, the `get` method will provide a copy of the underlying primitive. `primitive` also provides a `value_type` type definition to expose the underlying primitive type.
 
