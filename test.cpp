@@ -351,6 +351,6 @@ int main() {
     constexpr Int expanded = Short(123);
     static_assert(expanded.get() == 123, "Could not convert from short to int.");
 
-    static_assert(Int(1), "The value did not convert to true.");
+    static_assert(!!Int(1), "The value did not convert to true.");
     static_assert(!Int(0), "The value did convert to false.");
 }
