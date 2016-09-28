@@ -368,5 +368,6 @@ int main() {
     SChar tester(100);
     tester = 500;
 
-    Char character = 'a';
+    constexpr Char character = 'a';
+    static_assert(character.get() == 'a', "Could not read a character.");
 }
