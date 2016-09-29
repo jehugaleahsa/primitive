@@ -7,11 +7,7 @@ C++ does not default initialize primitive variables in functions and classes. Th
     int i;
     std::cout << i << std::endl;
     
-Most C++ developers are familiar with this, making sure to only initialize variables with values in functions and always doing member initialization in constructors. However, this is an easy mistake to make and can lead to surprising results for inexperienced programmers.
-
-Many C programmers are familiar with this issue; a common bug is to forget to NUL (`\0`) terminate C strings. This leads to errors (overflows) because primitives in arrays are not initialized either.
-
-    char text[6] = { 'H', 'E', 'L', 'L', 'O' };  // Potentially missing NUL terminator
+Most C++ developers are familiar with this, making sure to only initialize variables with values in functions and always doing member initialization in constructors. However, this is an easy mistake to make and can lead to surprising results for inexperienced programmers. Ininitialized arrays suffer the same problem.
     
 For this reason, many organizations have policies in place that all variables must be initialized when defined. The purpose of this project is to enforce up-front initialization using C++ user-defined construction semantics. C++ guarantees that all user-defined types are constructed on creation.
 
