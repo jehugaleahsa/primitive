@@ -100,7 +100,7 @@ int main() {
     assert(add.get() == 9);
 
     Int add_self(5);
-    add_self += Short(4);
+    add_self += Short::from(4);
     assert(add_self.get() == 9);
 
     Int substract(5);
@@ -108,7 +108,7 @@ int main() {
     assert(substract.get() == 1);
 
     Int substract_self(5);
-    substract_self -= Short(4);
+    substract_self -= Short::from(4);
     assert(substract_self.get() == 1);
 
     Int multiply(5);
@@ -116,7 +116,7 @@ int main() {
     assert(multiply.get() == 20);
 
     Int multiply_self(5);
-    multiply_self *= Short(4);
+    multiply_self *= Short::from(4);
     assert(multiply_self.get() == 20);
 
     Int divide(20);
@@ -124,7 +124,7 @@ int main() {
     assert(divide.get() == 5);
 
     Int divide_self(20);
-    divide_self /= Short(4);
+    divide_self /= Short::from(4);
     assert(divide_self.get() == 5);
 
     Int modulus(21);
@@ -132,7 +132,7 @@ int main() {
     assert(modulus.get() == 1);
 
     Int modulus_self(21);
-    modulus_self %= Short(4);
+    modulus_self %= Short::from(4);
     assert(modulus_self.get() == 1);
 
     Int shiftleft(2);
@@ -176,60 +176,60 @@ int main() {
     assert(bitxor_self.get() == 5);
 
     // Implicit conversions
-    constexpr Short schar2shortconv(SChar(12));
+    constexpr Short schar2shortconv(SChar::from(12));
     static_assert(schar2shortconv.get() == 12, "A signed char was not converted to a short.");
-    constexpr UShort uchar2ushortconv(UChar(12u));
+    constexpr UShort uchar2ushortconv(UChar::from(12u));
     static_assert(uchar2ushortconv.get() == 12, "An unsigned char was not converted to an unsigned short.");
 
-    constexpr Int schar2intconv(SChar(12));
+    constexpr Int schar2intconv(SChar::from(12));
     static_assert(schar2intconv.get() == 12, "A signed char was not converted to an int.");
-    constexpr Int short2intconv(Short(12));
+    constexpr Int short2intconv(Short::from(12));
     static_assert(short2intconv.get() == 12, "A signed short was not converted to an int.");
 
-    constexpr UInt uchar2uintconv(UChar(12u));
+    constexpr UInt uchar2uintconv(UChar::from(12u));
     static_assert(uchar2uintconv.get() == 12, "An unsigned char was not converted to an unsigned int.");
-    constexpr UInt ushort2uintconv(UShort(12u));
+    constexpr UInt ushort2uintconv(UShort::from(12u));
     static_assert(ushort2uintconv.get() == 12, "An unsigned short was not converted to an unsigned int.");
 
-    constexpr Long schar2longconv(SChar(12));
+    constexpr Long schar2longconv(SChar::from(12));
     static_assert(schar2longconv.get() == 12, "A signed char was not converted to a long.");
-    constexpr Long short2longconv(Short(12));
+    constexpr Long short2longconv(Short::from(12));
     static_assert(short2longconv.get() == 12, "A signed short was not converted to a long.");
     constexpr Long int2longconv(Int(12));
     static_assert(int2longconv.get() == 12, "A signed int was not converted to a long.");
 
-    constexpr ULong uchar2ulongconv(UChar(12u));
+    constexpr ULong uchar2ulongconv(UChar::from(12u));
     static_assert(uchar2ulongconv.get() == 12, "An unsigned char was not converted to an unsigned long.");
-    constexpr ULong ushort2ulongconv(UShort(12u));
+    constexpr ULong ushort2ulongconv(UShort::from(12u));
     static_assert(ushort2ulongconv.get() == 12, "An unsigned short was not converted to an unsigned long.");
     constexpr ULong uint2ulongconv(UInt(12u));
     static_assert(uint2ulongconv.get() == 12, "An unsigned int was not converted to an unsigned long.");
 
-    constexpr Long_Long schar2longlongconv(SChar(12));
+    constexpr Long_Long schar2longlongconv(SChar::from(12));
     static_assert(schar2longlongconv.get() == 12, "A signed char was not converted to a long long.");
-    constexpr Long_Long short2longlongconv(Short(12));
+    constexpr Long_Long short2longlongconv(Short::from(12));
     static_assert(short2longlongconv.get() == 12, "A signed short was not converted to a long long.");
     constexpr Long_Long int2longlongconv(Int(12));
     static_assert(int2longlongconv.get() == 12, "A signed int was not converted to a long long.");
     constexpr Long_Long long2longlongconv(Long(12));
     static_assert(long2longlongconv.get() == 12, "A signed long was not converted to a long long.");
 
-    constexpr ULong_Long uchar2ulonglongconv(UChar(12u));
+    constexpr ULong_Long uchar2ulonglongconv(UChar::from(12u));
     static_assert(uchar2ulonglongconv.get() == 12, "An unsigned char was not converted to an unsigned long long.");
-    constexpr ULong_Long ushort2ulonglongconv(UShort(12u));
+    constexpr ULong_Long ushort2ulonglongconv(UShort::from(12u));
     static_assert(ushort2ulonglongconv.get() == 12, "An unsigned short was not converted to an unsigned long long.");
     constexpr ULong_Long uint2ulonglongconv(UInt(12u));
     static_assert(uint2ulonglongconv.get() == 12, "An unsigned int was not converted to an unsigned long long.");
     constexpr ULong_Long ulong2ulonglongconv(ULong(12u));
     static_assert(ulong2ulonglongconv.get() == 12, "An unsigned long was not converted to an unsigned long long.");
 
-    constexpr Double schar2doubleconv(SChar(-12));
+    constexpr Double schar2doubleconv(SChar::from(-12));
     static_assert(schar2doubleconv.get() == -12.0, "A signed char was not converted to a double.");
-    constexpr Double uchar2doubleconv(UChar(12u));
+    constexpr Double uchar2doubleconv(UChar::from(12u));
     static_assert(uchar2doubleconv.get() == 12.0, "An unsigned char was not converted to a double.");
-    constexpr Double short2doubleconv(Short(-12));
+    constexpr Double short2doubleconv(Short::from(-12));
     static_assert(short2doubleconv.get() == -12.0, "A signed short was not converted to a double.");
-    constexpr Double ushort2doubleconv(UShort(12u));
+    constexpr Double ushort2doubleconv(UShort::from(12u));
     static_assert(ushort2doubleconv.get() == 12.0, "An unsigned short was not converted to a double.");
     constexpr Double int2doubleconv(Int(-12));
     static_assert(int2doubleconv.get() == -12.0, "A signed int was not converted to a double.");
@@ -242,13 +242,13 @@ int main() {
     constexpr Double float2doubleconv(Float(-12.0f));
     static_assert(float2doubleconv.get() == -12.0, "A signed long was not converted to a double.");
 
-    constexpr Long_Double schar2longdoubleconv(SChar(-12));
+    constexpr Long_Double schar2longdoubleconv(SChar::from(-12));
     static_assert(schar2longdoubleconv.get() == -12.0, "A signed char was not converted to a long double.");
-    constexpr Long_Double uchar2longdoubleconv(UChar(12u));
+    constexpr Long_Double uchar2longdoubleconv(UChar::from(12u));
     static_assert(uchar2longdoubleconv.get() == 12.0, "An unsigned char was not converted to a long double.");
-    constexpr Long_Double short2longdoubleconv(Short(-12));
+    constexpr Long_Double short2longdoubleconv(Short::from(-12));
     static_assert(short2longdoubleconv.get() == -12.0, "A signed short was not converted to a long double.");
-    constexpr Long_Double ushort2longdoubleconv(UShort(12u));
+    constexpr Long_Double ushort2longdoubleconv(UShort::from(12u));
     static_assert(ushort2longdoubleconv.get() == 12.0, "An unsigned short was not converted to a long double.");
     constexpr Long_Double int2longdoubleconv(Int(-12));
     static_assert(int2longdoubleconv.get() == -12.0, "A signed int was not converted to a long double.");
@@ -352,21 +352,21 @@ int main() {
     assert(output.str() == "123");
 
     // Test promotions
-    constexpr Int expanded = Short(123);
+    constexpr Int expanded = Short::from(123);
     static_assert(expanded.get() == 123, "Could not convert from short to int.");
 
     Int expand_into;
-    expand_into = Short(100);
+    expand_into = Short::from(100);
     assert(expand_into == 100);
 
     // Test demotions
-    static_assert(SChar(12).get() == 12, "Could not create a signed char from an int.");
-    static_assert(UChar(12u).get() == 12, "Could not create an unsigned char from an unsigned int.");
-    static_assert(Short(12).get() == 12, "Could not create a short from an int.");
-    static_assert(UShort(12u).get() == 12, "Could not create an unsigned short from an unsigned int.");
+    static_assert(SChar::from(12).get() == 12, "Could not create a signed char from an int.");
+    static_assert(UChar::from(12u).get() == 12, "Could not create an unsigned char from an unsigned int.");
+    static_assert(Short::from(12).get() == 12, "Could not create a short from an int.");
+    static_assert(UShort::from(12u).get() == 12, "Could not create an unsigned short from an unsigned int.");
 
-    SChar tester(100);
-    tester = 500;
+    SChar tester = SChar::from(100);
+    tester = SChar::from(500);
 
     constexpr Char character = 'a';
     static_assert(character.get() == 'a', "Could not read a character.");
