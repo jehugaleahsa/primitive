@@ -40,10 +40,28 @@ The `primitive` class implements most of its functionality as `constexpr` to all
     contexpr Int BUFFER_SIZE = 1024; 
     UChar buffer[BUFFER_SIZE * 4];
     
-## Underflow/Overflow-Safe Implicit Conversions (Optional)
-The `primitive` class includes member templates to limit which conversions are permitted among primitive types. In C++, some of the legal conversion are surprising and error prone. For example, `double` implicitly converts to `int` (`int three = 3.14;`). Additionally, `char` is often used as an 8-bit arithmetic type, but there are no guarantees that it is signed or unsigned. For that reason, `primitive` does not explicitly allow `char` to implicitly convert to other types; however, in many environments `char` is simply a typedef of a `signed` or `unsigned char`, so the conversion must be permitted.
+## Safer Promotions and Conversions (Optional)
+The `primitive` class includes member templates to limit which conversions are permitted among primitive types. In C++, some of the legal conversion are surprising and error prone. For example, `double` implicitly converts to `int` (`int three = 3.14;`). These types of implicit conversions are disabled as much as possible. That said, `primitive` still permits some odd conversions due to limitations in the C++ language itself.
 
-In cases where you are sure about the conversion, explicit conversions via `static_cast` are permitted.
+For instance, C++ allows signed and unsigned `char` and `short` values to be initialized from integer literals; the best you can hope for is a warning. In order to declare variables of these types, `primitive` allows initialization from `int` (e.g., `primitive<short> x = 123;`). Unfortunately, the following compiles as well:
+
+    using Short = primitive<short>;
+    Short x = 123;  // allow int -> short conversion
+    x = 234;  // 234 becomes Short(234) rather than primitive<int>(234)
+    
+Again, the best you can hope for is adequate warnings if your literals exceed the size of your variables.
+
+Another restriction imposed by `primitive` is that signed and unsigned variables and literals cannot be mixed. Unsigned variables must be initialized using unsigned literals (e.g., `primitive<unsigned int> x = 123u;`). Signed variables must be initialized from signed literals (e.g., `primitive<int> x = 123;`).
+
+Additionally, `char` is often used as an 8-bit arithmetic type, but there are no guarantees that it is signed or unsigned. For that reason, `primitive` does not explicitly allow `char` to implicitly convert to other types; however, in many environments `char` is simply a typedef of a `signed` or `unsigned char`, so the conversion must be permitted.
+
+If you want to define your own conversions, you can define a template specialization:
+
+    template<> struct is_promotion<From, To> : std::true_type {};
+    
+Here, `From` is the type you want to convert to type `To`. This is useful if working with `<cstdint>` and need to support promotion, e.g., `int32_t` to `int64_t`.
+
+In cases where you are sure about the conversion, explicit conversions to other `primitive` types are supported via `static_cast`.
 
 ## Limiting Booleans (optional)
 C++ programmers are accustom to treating booleans (`bool`) as arithmetic types. It is not uncommon to see a `bool` added to an `int`. However, most of the time, conversion to and from `bool` should be explicit through comparisons or logical negation (`!`). For that reason, it will be common to see the following when using `primitive<bool>`:
