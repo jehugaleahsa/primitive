@@ -55,11 +55,12 @@ Another restriction imposed by `primitive` is that signed and unsigned variables
 
 Additionally, `char` is often used as an 8-bit arithmetic type, but there are no guarantees that it is signed or unsigned. For that reason, `primitive` does not explicitly allow `char` to implicitly convert to other types; however, in many environments `char` is simply a typedef of a `signed` or `unsigned char`, so the conversion must be permitted.
 
-If you want to define your own conversions, you can define a template specialization:
+If you want to define your own promotions or conversions, you can define your own template specializations:
 
-    template<> struct is_promotion<From, To> : std::true_type {};
+    template<> struct is_conversion<From, To> : std::true_type {};  // higher to lower precision
+    template<> struct is_promotion<From, To> : std::true_type {};  // lower to higher precision
     
-Here, `From` is the type you want to convert to type `To`. This is useful if working with `<cstdint>` and need to support promotion, e.g., `int32_t` to `int64_t`.
+Here, `From` is the type you want to convert/promote to type `To`. This would be useful if working with `<cstdint>` and need to support promotion, e.g., `int32_t` to `int64_t`. Be very careful about which conversions you enable.
 
 In cases where you are sure about the conversion, explicit conversions to other `primitive` types are supported via `static_cast`.
 
