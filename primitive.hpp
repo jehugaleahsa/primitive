@@ -23,7 +23,7 @@ public:
 
     template<typename U, typename = std::enable_if_t< is_conversion<U, T>::value >>
     constexpr static primitive from(U const& other) noexcept {
-        return primitive(static_cast<T>(other));
+        return primitive(T(other));
     }
 
     primitive(primitive const&) = default;

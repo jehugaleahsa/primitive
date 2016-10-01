@@ -40,14 +40,16 @@ The `primitive` class implements most of its functionality as `constexpr` to all
     contexpr Int BUFFER_SIZE = 1024;
     UChar buffer[BUFFER_SIZE * 4];
 
-## Safer Promotions and Conversions (Optional)
+## Safer Promotions and Narrowing (Optional)
 The `primitive` class includes member templates to limit which conversions are permitted among primitive types. In C++, some of the legal conversion are surprising and error prone. For example, `double` implicitly converts to `int` (`int three = 3.14;`). These types of implicit conversions are disabled as much as possible.
 
-C++ allows signed and unsigned `char` and `short` values to be initialized from integer literals; the best you can hope for is a warning if the value would be truncated. In order to declare variables of these types, `primitive` provides a static `from` function to convert from `int` (e.g., `auto x = primitive<short>::from(123);`). Even `from` restricts which values `primitive`s can be initialized with. The absolute workaround is to `static_cast` the value beforehand. If you want to support additional conversions with the `from` function, provide a template specialization:
+C++ allows signed and unsigned `char` and `short` values to be initialized from integer literals; the best you can hope for is a warning if the value would be truncated. In order to declare variables of these types, `primitive` provides a static `from` function to convert from `int` (e.g., `auto x = primitive<short>::from(123);`). Your compiler should provide the same level of warnings when using `from`.
+
+Even `from` restricts which values `primitive`s can be initialized with. If you want to support additional conversions with the `from` function, provide a template specialization:
 
     template<> struct is_conversion<From, To> : std::true_type {};  // higher to lower precision
 
-Here, `From` is the type you want to convert to type `To`.
+Here, `From` is the type you want to convert to type `To`. Note your compiler may still refuse your custom conversions. The absolute workaround is to `static_cast` the value beforehand.
 
 Another restriction imposed by `primitive` is that signed and unsigned variables and value cannot be mixed. Unsigned variables must be initialized using unsigned literals (e.g., `primitive<unsigned int> x = 123u;`). Signed variables must be initialized from signed literals (e.g., `primitive<int> x = 123;`).
 
