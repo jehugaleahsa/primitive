@@ -4,6 +4,8 @@
 #include "arithmetic_traits.h"
 #include <iosfwd>
 
+namespace primitives {
+
 template<typename T, typename = std::enable_if_t< std::is_arithmetic<T>::value >>
 class primitive final {
     T m_value;
@@ -421,5 +423,7 @@ template<typename T>
 std::ostream& operator<<(std::ostream& lhs, primitive<T> const& rhs) {
     return lhs << rhs.get();
 }
+
+}  // namespace primitives
 
 #endif

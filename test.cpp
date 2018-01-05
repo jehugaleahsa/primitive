@@ -8,6 +8,7 @@
 int main() {
     using std::is_same;
     using std::move;
+    using primitives::primitive;
 
     using Boolean = primitive<bool>;
     using Char = primitive<char>;
