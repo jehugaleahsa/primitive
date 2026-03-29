@@ -1,4 +1,4 @@
-> *Archived 2026-03-28*: This project is very old and will no longer be maintained. I created right around the same time C++ introduced `{}` initializers, negating most of the value. There may even be better alternatives today! It was still a fun project at the time. 
+> *Archived 2026-03-28*: This project is very old and will no longer be maintained. I created it right around the same time C++ introduced `{}` initializers, negating most of the value. There may even be better alternatives today! It was still a fun project at the time. 
 
 # primitive
 Provide user-defined initialization semantics for arithmetic types.
